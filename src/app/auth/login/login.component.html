@@ -1,0 +1,49 @@
+<!-- <app-navbar></app-navbar>
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+<div class="body" [ngClass]="getBodyClass()">
+  <h1>Login page</h1>
+</div> -->
+<mat-card class="card example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title class="card-title title"
+      ><mat-icon>fingerprint</mat-icon>SupNum</mat-card-title
+    >
+    <mat-card-subtitle class="title-into">
+      Connexion a votre compte</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content class="card-body content">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="login-top">
+        <mat-form-field appearance="outline" class="fill">
+          <mat-label>Email</mat-label>
+          <input name="email" type="email" formControlName="email" matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="fill">
+          <mat-label>Password</mat-label>
+          <input
+            name="password"
+            type="password"
+            formControlName="password"
+            matInput
+          />
+        </mat-form-field>
+        <div class="login-btn">
+          <button mat-flat-button color="primary" type="submit">Login</button>
+        </div>
+      </div>
+      <div class="login-buttom">
+        <div class="foget">
+          <a class="link" routerLink="forget">Mot de passe oublié?</a>
+        </div>
+        <div class="signup">
+          Vous n'avez pas de compte?<a class="link" routerLink="../home-signup"
+            >Inscrivez-vous</a
+          >
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

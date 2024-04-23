@@ -1,0 +1,118 @@
+<div class="head" [ngClass]="getHeadClass()">
+  <div class="head-content">
+    <div class="head-content-left">
+      <!--   <div class="search-container">
+        <div *ngIf="!canShawSearchAsOverlay" class="normal-search">
+          <input type="search" class="search" placeholder="Recherche..." />
+          <mat-icon class="search-icon">search</mat-icon>
+        </div>
+        <div *ngIf="canShawSearchAsOverlay">
+          <button
+            [cdkMenuTriggerFor]="searchOverlay"
+            class="search-menu-btn ripple"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div> -->
+      <app-filter></app-filter>
+    </div>
+    <div class="head-content-right">
+      <div class="head-menu">
+        <div class="head-menu-item">
+          <button class="head-menu-item-btn ripple">
+            <img src="assets/flag/mr.png" alt="flag" class="flag" />
+          </button>
+        </div>
+        <div class="head-menu-item">
+          <button class="head-menu-item-btn ripple">
+            <mat-icon>crop_free</mat-icon>
+          </button>
+        </div>
+        <div class="head-menu-item">
+          <button
+            class="head-menu-item-btn ripple"
+            [cdkMenuTriggerFor]="notificationOverlay"
+          >
+            <mat-icon>notifications_none</mat-icon>
+          </button>
+        </div>
+        <div class="head-menu-item">
+          <button class="head-menu-item-btn ripple">
+            <mat-icon>chat_bubble_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="head-user-avatar-container">
+        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
+          <img
+            src="assets/flag/user.jpg"
+            alt="user"
+            class="user-avatar"
+            style="width: 25px"
+          />
+          <div class="circle-indicator pulse"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #searchOverlay>
+  <div class="overlay overlay-search overlay-fall" cdkMenu>
+    <input
+      type="search"
+      name=""
+      id=""
+      class="search"
+      placeholder="Recherche..."
+    />
+    <button class="search-btn">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #notificationOverlay>
+  <div class="overlay overlay-notification overlay-fall" cdkMenu>
+    <ul class="ul">
+      <li class="li-head notification-head-container">
+        <div class="notification-head">Notification</div>
+        <span class="view-all-link">
+          <a class="a">Voir tout</a>
+        </span>
+      </li>
+      <li
+        class="li notification-message-container"
+        *ngFor="let notification of notifications"
+        cdkMenuItem
+      >
+        <!--  <fa-icon [icon]="faAngleDown"></fa-icon> -->
+        <mat-icon class="notification-icon">{{ notification.icon }}</mat-icon>
+
+        <div>
+          <div class="notification-subject">
+            {{ notification.subject }}
+          </div>
+          <p class="notification-desc">
+            {{ notification.description }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #userOverlay>
+  <div class="overlay overlay-user overlay-fall" cdkMenu>
+    <ul class="ul">
+      <li *ngFor="let item of userItems" class="li">
+        <a>
+          <mat-icon class="mat-icon">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</ng-template>

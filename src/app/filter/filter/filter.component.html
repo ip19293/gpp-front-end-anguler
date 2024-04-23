@@ -1,0 +1,33 @@
+<div class="search-container">
+  <div *ngIf="!canShawSearchAsOverlay" class="normal-search">
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      #input
+      type="search"
+      class="search"
+      placeholder="Recherche..."
+    />
+    <mat-icon class="search-icon">search</mat-icon>
+  </div>
+  <div *ngIf="canShawSearchAsOverlay">
+    <button [cdkMenuTriggerFor]="searchOverlay" class="search-menu-btn ripple">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</div>
+
+<ng-template #searchOverlay>
+  <div class="overlay overlay-search overlay-fall" cdkMenu>
+    <input
+      type="search"
+      name=""
+      id=""
+      class="search"
+      placeholder="Recherche..."
+    />
+    <button class="search-btn">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</ng-template>

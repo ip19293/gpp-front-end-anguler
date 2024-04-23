@@ -1,0 +1,68 @@
+.example-card {
+  width: 500px;
+  height: 400px;
+  max-width: 650px;
+  justify-content: center;
+  align-items: center;
+}
+.login-top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+.title {
+  font-size: 24px;
+  /*   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif; */
+}
+.title-into {
+  margin-top: 10px;
+  font-size: 14px;
+  font-style: oblique;
+}
+.content {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  .login-buttom {
+    display: flex;
+    flex-direction: row;
+    padding: auto;
+    margin-bottom: 10px;
+    .link {
+      margin-bottom: 5px;
+    }
+    .signup {
+      margin-left: auto;
+    }
+  }
+}
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  width: calc(100% - 5rem);
+  height: calc(100vh - 125px);
+  margin-top: 5.75rem;
+  margin-left: 5rem;
+  z-index: 0;
+  position: relative;
+  top: 0;
+  transition: all 0.5s ease;
+  background: #f4f7fa;
+  padding: 3rem;
+}
+.body-trimmed {
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
+}
+.body-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}
