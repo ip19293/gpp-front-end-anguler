@@ -7,6 +7,9 @@ import { FiliereDetailComponent } from './components/filiere-detail/filiere-deta
 import { AddEditElementComponent } from './components/add-edit-element/add-edit-element.component';
 import { CategorieAddEditComponent } from './components/categorie-add-edit/categorie-add-edit.component';
 import { FiliereAddEditComponent } from './components/filiere-add-edit/filiere-add-edit.component';
+import { FiliereEmploiComponent } from './components/filiere-emploi/filiere-emploi.component';
+import { AddEditEmploiComponent } from './components/add-edit-emploi/add-edit-emploi.component';
+import { GroupeAffectationComponent } from './components/groupe-affectation/groupe-affectation.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +17,11 @@ import { FiliereAddEditComponent } from './components/filiere-add-edit/filiere-a
     CategorieComponent,
     FiliereDetailComponent,
     AddEditElementComponent,
+    AddEditEmploiComponent,
     CategorieAddEditComponent,
     FiliereAddEditComponent,
+    FiliereEmploiComponent,
+    GroupeAffectationComponent,
   ],
   imports: [SharedModule, FiliereRoutingModule],
 })

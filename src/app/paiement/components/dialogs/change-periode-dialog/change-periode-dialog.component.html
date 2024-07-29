@@ -1,0 +1,53 @@
+<h1 mat-dialog-title class="border-b">Modifier la période</h1>
+<div mat-dialog-content>
+  <div class="content">
+    <div class="row flex w-full border-1 rounded-md p-4">
+      <mat-form-field appearance="outline" class="mt-4">
+        <mat-label>Du</mat-label>
+        <input matInput [matDatepicker]="debit" [(ngModel)]="data.fromDate" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="debit"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #debit></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="fill">
+        <mat-label>Au</mat-label>
+        <input matInput [matDatepicker]="fin" [(ngModel)]="data.toDate" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="fin"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #fin></mat-datepicker>
+      </mat-form-field>
+      <!--  <p>What's your favorite animal?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="data.animal" />
+  </mat-form-field> -->
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="action">
+  <button
+    mat-button
+    class="px-3"
+    type="button"
+    color="warn"
+    (click)="onNoClick()"
+  >
+    Annuler
+    <mat-icon>close</mat-icon>
+  </button>
+  <button
+    mat-button
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    color="primary"
+    class="px-3"
+    type="submit"
+  >
+    Ok
+    <mat-icon>checked</mat-icon>
+  </button>
+</div>

@@ -1,3 +1,5 @@
-@tailwind base;
+@import "ngx-toastr/toastr";
+@import "~@angular/cdk/overlay-prebuilt.css";
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */

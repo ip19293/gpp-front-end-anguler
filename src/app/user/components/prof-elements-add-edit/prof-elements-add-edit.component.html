@@ -1,0 +1,57 @@
+<div mat-dialog-title class="border-b">
+  <h1>{{ data ? "Modifier l' " : "Ajouter un " }}élément</h1>
+</div>
+<form [formGroup]="elementForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row border-1 rounded-md py-2 px-3">
+      <mat-form-field appearance="outline" class="mt-4">
+        <mat-label>Filiere</mat-label>
+        <select
+          matNativeControl
+          name="filiere"
+          formControlName="filiere"
+          [(ngModel)]="filiereSelected"
+          (ngModelChange)="onFiliereSelected($event)"
+        >
+          <option *ngFor="let filiere of filieres" value="{{ filiere._id }}">
+            {{ filiere.name | uppercase }} ({{ filiere.niveau }})
+          </option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Element</mat-label>
+        <select matNativeControl name="element" formControlName="element">
+          <option value="" selected></option>
+          <option *ngFor="let element of elements" value="{{ element._id }}">
+            {{ element.name }}
+          </option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <select matNativeControl name="type" formControlName="type">
+          <option selected value=""></option>
+          <option value="CM">CM</option>
+          <option value="TD">TD</option>
+          <option value="TP">TP</option>
+        </select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button
+      mat-stroked-button
+      class="px-3"
+      type="button"
+      color="warn"
+      [mat-dialog-close]="false"
+    >
+      Annuler
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-stroked-button color="primary" class="px-3" type="submit">
+      {{ data ? "Modifier" : "Enregistrer" }}
+      <mat-icon>checked</mat-icon>
+    </button>
+  </div>
+</form>

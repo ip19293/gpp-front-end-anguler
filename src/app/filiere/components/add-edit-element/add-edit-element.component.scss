@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content {
+  padding-top: 20px;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.action {
+  padding: 0px 25px 20px;
+
+  .mat-radio-button {
+    flex: 1;
+  }
+}
+.CM,
+.TP,
+.TD {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  .not-fill {
+    width: 65%;
+  }
+  .not-fill1 {
+    width: 30%;
+  }
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  .fill {
+    width: 100%;
+  }
+}
+.form-container {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.fadeOut {
+  opacity: 1;
+}

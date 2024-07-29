@@ -1,1 +1,35 @@
-<p>categorie-add-edit works!</p>
+<div mat-dialog-title class="border-b pb-3">
+  <h1 class="text-xl font-medium">
+    {{ data ? "Modifier la" : "Ajouter une" }} catégorie
+  </h1>
+</div>
+<form [formGroup]="categorieForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="">
+    <div class="row border-1 rounded-md py-2 px-6">
+      <mat-form-field appearance="outline" class="mt-4">
+        <mat-label>Nom</mat-label>
+        <input type="text" matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Taux horaire</mat-label>
+        <input type="number" matInput formControlName="prix" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button
+      mat-stroked-button
+      class="px-3"
+      type="button"
+      color="warn"
+      [mat-dialog-close]="false"
+    >
+      Annuler
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-stroked-button color="primary" class="px-3" type="submit">
+      {{ data ? "Modifier" : "Enregistrer" }}
+      <mat-icon>checked</mat-icon>
+    </button>
+  </div>
+</form>

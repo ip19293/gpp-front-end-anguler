@@ -5,7 +5,7 @@ import { UsersInitState, UsersState, UsersStateEnum } from './user.state';
 export function usersReducer(
   state: UsersState = UsersInitState,
   action: UserActions
-): UsersState {
+) {
   switch (action.type) {
     case UsersActionTypes.GET_ALL_USERS:
       return { ...state, dataState: UsersStateEnum.LOADING };
@@ -19,6 +19,20 @@ export function usersReducer(
       return {
         ...state,
         dataState: UsersStateEnum.ERROR,
+        errorMessage: action.payload,
+      };
+    case UsersActionTypes.ADD_USER:
+      return {
+        ...state,
+      };
+    case UsersActionTypes.ADD_USER_SUCCESS:
+      return {
+        ...state,
+        successMessage: action.payload,
+      };
+    case UsersActionTypes.ADD_USER_ERROR:
+      return {
+        ...state,
         errorMessage: action.payload,
       };
     default:

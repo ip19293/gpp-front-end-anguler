@@ -1,0 +1,64 @@
+<div
+  class="p-3 flex bg-white rounded-t-md"
+  [ngClass]="
+    !displaed_left && !displaed_right
+      ? 'hidden'
+      : !displaed_left
+      ? 'justify-end'
+      : 'justify-between'
+  "
+>
+  <div
+    class="flex hover:bg-gray-600 group items-center rounded-md bg-white text-sm font-medium p-2 space-x-1"
+  >
+    <button
+      [disabled]="!clicked_left"
+      [ngClass]="!displaed_left ? 'hidden' : ''"
+      (click)="filterAction()"
+      mat-icon-button
+      color="primary"
+    >
+      <mat-icon>{{ icon_left }}</mat-icon>
+    </button>
+    <span
+      [ngClass]="
+        text_left != ''
+          ? 'py-1 px-2 text-gray-700 bg-gray-50 rounded-lg'
+          : 'hidden'
+      "
+    >
+      {{ text_left }}</span
+    >
+  </div>
+
+  <div class="flex justify-end">
+    <!--     <button
+      [disabled]="!clicked_right"
+      class="flex p-4 rounded-md shadow-sm"
+      mat-stroked-button
+      color="primary"
+      (click)="addAction()"
+      [ngClass]="
+        !displaed_right || role == 'professeur'
+          ? 'hidden'
+          : role === 'admin' && displaed_right
+          ? 'bg-gray-700 text-white hover:bg-gray-500'
+          : 'bg-gray-700 text-white hover:bg-gray-800'
+      "
+    >
+      <mat-icon>{{ icon_right }}</mat-icon>
+      {{ text_right }}
+    </button> -->
+
+    <a
+      mat-button
+      [disabled]="!clicked_right"
+      [ngClass]="!displaed_right ? 'hidden' : ''"
+      (click)="addAction()"
+      class="flex hover:bg-gray-600 group items-center rounded-md bg-gray-700 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
+    >
+      <mat-icon>{{ icon_right }}</mat-icon>
+      {{ text_right }}
+    </a>
+  </div>
+</div>

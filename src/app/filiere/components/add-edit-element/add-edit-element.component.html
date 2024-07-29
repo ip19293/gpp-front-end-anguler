@@ -1,1 +1,259 @@
-<p>add-edit-element works!</p>
+<div mat-dialog-title>
+  <div class="flex justify-between mx-3 space-x-7">
+    <h1>
+      {{
+        data
+          ? "Modifier l' élément"
+          : selectedType === "un"
+          ? "Ajouter un élément"
+          : "Ajouter des éléments"
+      }}
+    </h1>
+    <mat-radio-group [(ngModel)]="selectedType" *ngIf="!data">
+      <mat-radio-button value="un">Un</mat-radio-button>
+      <mat-radio-button value="plusieurs">Plusieurs</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</div>
+
+<!-- ================================================================================================================================================== -->
+<div mat-dialog-content>
+  <div
+    class="form-container grid grid-cols-1 md:grid-cols-2 gap-4 mt-2"
+    [ngClass]="{
+      fadeIn: selectedType === 'un',
+      fadeOut: selectedType === 'plusieurs'
+    }"
+  >
+    <!-- ------------------------------------------------------------add one ------------------ -->
+    <div *ngIf="selectedType === 'un'" class="md:col-span-2">
+      <form
+        *ngIf="selectedType === 'un'"
+        [formGroup]="elementForm"
+        (ngSubmit)="onFormSubmit()"
+        class="space-y-4"
+      >
+        <div class="row border-1 rounded-md py-2 px-6 w-auto">
+          <mat-form-field
+            appearance="outline"
+            class="mt-4"
+            *ngIf="selectedType === 'un'"
+          >
+            <mat-label>Nom</mat-label>
+            <input name="name" type="text" matInput formControlName="name" />
+          </mat-form-field>
+          <div class="flex justify-between space-x-1">
+            <mat-form-field
+              appearance="outline"
+              *ngIf="selectedType === 'un'"
+              class="fill"
+            >
+              <mat-label>Semestre</mat-label>
+              <mat-select formControlName="semestre">
+                <mat-option
+                  *ngFor="let semestre of semestreList"
+                  [value]="semestre.value"
+                  >{{ semestre.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              *ngIf="selectedType === 'un'"
+              class="fill"
+            >
+              <mat-label>Categorie</mat-label>
+              <select
+                matNativeControl
+                name="categorie"
+                formControlName="categorie"
+              >
+                <option
+                  *ngFor="let categorie of categories"
+                  value="{{ categorie._id }}"
+                >
+                  {{ categorie.name }}
+                </option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="CM">
+            <mat-form-field
+              appearance="outline"
+              class="not-fill"
+              *ngIf="selectedType === 'un'"
+            >
+              <mat-label>Professeur CM</mat-label>
+              <mat-select
+                matNativeControl
+                [compareWith]="compareObjects"
+                formControlName="professeurCM"
+                multiple
+              >
+                <mat-option
+                  *ngFor="let professeur of professeurs"
+                  [value]="professeur._id"
+                >
+                  {{ professeur.nom }} {{ professeur.prenom }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              class="not-fill1"
+              *ngIf="selectedType === 'un'"
+            >
+              <mat-label>heures CM</mat-label>
+              <input
+                name="heuresCM"
+                type="number"
+                matInput
+                formControlName="heuresCM"
+                placeholder="heures CM"
+              />
+            </mat-form-field>
+          </div>
+          <div class="TP">
+            <mat-form-field
+              appearance="outline"
+              class="not-fill"
+              *ngIf="selectedType === 'un'"
+            >
+              <mat-label>Professeur TP</mat-label>
+              <mat-select
+                matNativeControl
+                [compareWith]="compareObjects"
+                formControlName="professeurTP"
+                multiple
+              >
+                <mat-option
+                  *ngFor="let professeur of professeurs"
+                  [value]="professeur._id"
+                  >{{ professeur.nom }} {{ professeur.prenom }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              class="not-fill1"
+              *ngIf="selectedType === 'un'"
+            >
+              <mat-label>heures TP</mat-label>
+              <input
+                name="heuresTP"
+                type="number"
+                matInput
+                formControlName="heuresTP"
+                placeholder="heures TP"
+              />
+            </mat-form-field>
+          </div>
+          <div class="TD">
+            <mat-form-field
+              appearance="outline"
+              class="not-fill"
+              *ngIf="selectedType === 'un'"
+            >
+              <mat-label>Professeur TD</mat-label>
+
+              <mat-select
+                matNativeControl
+                [compareWith]="compareObjects"
+                formControlName="professeurTD"
+                multiple
+              >
+                <mat-option
+                  *ngFor="let professeur of professeurs"
+                  [value]="professeur._id"
+                  >{{ professeur.nom }} {{ professeur.prenom }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              appearance="outline"
+              class="not-fill1"
+              *ngIf="selectedType === 'un'"
+            >
+              <mat-label>heures TD</mat-label>
+              <input
+                name="heuresTD"
+                type="number"
+                matInput
+                formControlName="heuresTD"
+                placeholder="heures TD"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div mat-dialog-actions class="action">
+          <button
+            mat-stroked-button
+            class="px-3"
+            type="button"
+            color="warn"
+            [mat-dialog-close]="false"
+          >
+            Annuler
+            <mat-icon>close</mat-icon>
+          </button>
+          <button mat-stroked-button color="primary" class="px-3" type="submit">
+            {{ data ? "Modifier" : "Enregistrer" }}
+            <mat-icon>checked</mat-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+    <!-- ----------------------------------------------------------------upload------------------------ -->
+    <div *ngIf="selectedType === 'plusieurs'" class="md:col-span-2">
+      <form
+        *ngIf="selectedType === 'plusieurs'"
+        [formGroup]="fileForm"
+        (ngSubmit)="onFormSubmit()"
+        class="space-y-4"
+      >
+        <div class="row border-1 rounded-md py-10 px-3 w-auto">
+          <div
+            class="p-3 border border-black rounded-md text-gray-400 flex"
+            style="width: 100%"
+          >
+            <input
+              style="width: 100%"
+              class=""
+              type="file"
+              formControlName="file"
+              id="file"
+              (change)="beforUpload($event)"
+              style="display: none"
+            />
+            <label for="file">
+              <fa-icon class="fa-close text-blue-800" [icon]="faCloudUpload">
+              </fa-icon>
+              &nbsp;
+              {{ selectedFileName || "Choisir un fichier.xlsx" }}
+            </label>
+          </div>
+        </div>
+        <div mat-dialog-actions class="action">
+          <button
+            mat-stroked-button
+            class="px-3"
+            type="button"
+            color="warn"
+            [mat-dialog-close]="false"
+          >
+            Annuler
+            <mat-icon>close</mat-icon>
+          </button>
+          <button mat-stroked-button color="primary" class="px-3" type="submit">
+            {{ data ? "Modifier" : "Enregistrer" }}
+            <mat-icon>checked</mat-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

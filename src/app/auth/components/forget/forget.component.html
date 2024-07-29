@@ -1,0 +1,81 @@
+<h2 class="text-lg font-medium mb-6 text-center"></h2>
+
+<!------------------------------------------  Main container ---------------------------- -->
+<div
+  class="container d-flex justify-content-center align-items-center min-vh-100"
+>
+  <!------------------------------------------  logo container ---------------------------- -->
+  <div class="row border rounder-5 p-3 bg-white shadow box-area">
+    <!------------------------------------------  left box ---------------------------- -->
+    <div
+      class="col-md-6 rounder-4 d-flex justify-content-center align-items-center flex-column left-box"
+      style="background-color: whitesmoke"
+    >
+      <div class="featured-image mb-3">
+        <img
+          src="assets/images/supnum.png"
+          alt=""
+          class="img-fluid"
+          style="width: 250px"
+        />
+        <p
+          class="text-black f-s-2"
+          style="
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+          "
+        >
+          Institut supérieur du numérique
+        </p>
+        <small
+          class="text-black text-wrap text-center"
+          style="width: 17rem; font-family: 'Courier New', Courier, monospace"
+        >
+          Gestion de Paiement des Professeurs</small
+        >
+      </div>
+    </div>
+    <!------------------------------------------  right box ---------------------------- -->
+    <div class="col-md-6 right-box">
+      <div class="row items-center">
+        <div class="header-text mt-3 mb-4">
+          <h1 class="text-2xl font-bold mb-4 text-center text-blue-950">
+            Mot de Passe Oublié
+          </h1>
+        </div>
+        <form [formGroup]="forgetForm" (ngSubmit)="forget()">
+          <div class="input-group my-3">
+            <input
+              class="form-control form-control-lg bg-light fs-6"
+              placeholder="Adresse e-mail"
+              name="email"
+              type="email"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid': isSubmit && forgetForm.controls['email'].errors
+              }"
+            />
+          </div>
+          <div class="input-group my-3">
+            <small>
+              Souvenez-vous du mot de passe?
+              <a routerLink="../login" class="text-blue-600">Se connecter</a>
+            </small>
+          </div>
+          <div class="input-group mb-4 gap-1">
+            <a
+              (click)="forget()"
+              mat-button
+              type="submit"
+              class="flex hover:bg-gray-600 group items-center rounded-md bg-gray-700 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
+            >
+              <mat-icon>send</mat-icon>
+              Envoyer
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!------------------------------------------  Main container ---------------------------- -->
+  </div>
+</div>

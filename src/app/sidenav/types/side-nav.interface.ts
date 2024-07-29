@@ -1,5 +1,6 @@
 export interface SideNavInterface {
   screenWidth: number;
   collapsed: boolean;
-  isNewInstanse?: boolean;
+  canShawSearchAsOverlay: boolean;
+  /*   isNewInstanse?: boolean; */
 }

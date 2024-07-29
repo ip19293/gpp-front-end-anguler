@@ -1,0 +1,11 @@
+<div class="block mt-2 justify-center responsive-container">
+  <canvas
+    style="width: 100px"
+    baseChart
+    [data]="barChartData"
+    [options]="barChartOptions"
+    [type]="role != 'professeur' ? barChartType : barChartType1"
+    class="responsive-canvas"
+  >
+  </canvas>
+</div>

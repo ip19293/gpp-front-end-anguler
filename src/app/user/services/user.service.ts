@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,12 +9,12 @@ export class UserService {
   private _headers = {
     Authorization: 'Bearer ' + localStorage.getItem('token'),
   };
-  users: any;
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  getAllUsers(): Observable<any> {
-    return this.http.get<any>('http://localhost:5000/user', {
-      headers: this._headers,
+  getAllUsers(query?: any): Observable<any> {
+    return this.http.get('http://localhost:5000/user?', {
+      // headers: this._headers,
+      params: query,
     });
   }
   getUserById(id: any): Observable<any> {

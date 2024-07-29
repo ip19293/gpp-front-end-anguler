@@ -1,0 +1,115 @@
+<div class="card overflow-x-auto rounded-b-md">
+  <div class="card-body">
+    <!-- ------------------------------------------------------------------------------------- -->
+    <div
+      [ngClass]="dataSource.data.length === 0 ? ' ' : 'hidden'"
+      class="bg-white border border-gray-200 p-4 rounded-md text-center"
+    >
+      <span class="text-3xl text-gray-500"><mat-icon>info</mat-icon></span>
+      <p class="text-lg">Aucune donnée disponible.</p>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------- -->
+    <div
+      class="table border border-gray-200 rounded-md"
+      [ngClass]="dataSource.data.length > 0 ? ' ' : 'hidden'"
+    >
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? toggleAllRows() : null; selecletionValue()"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+              [aria-label]="checkboxLabel()"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="
+                $event ? selection.toggle(row) : null; selecletionValue()
+              "
+              [checked]="selection.isSelected(row)"
+              [aria-label]="checkboxLabel(row)"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <!-- professeur Column -->
+        <ng-container matColumnDef="professeur">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Enseignant(e)
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.nom | uppercase }}
+            {{ row.prenom | uppercase }}
+          </td>
+        </ng-container>
+        <!-- nbc Column -->
+        <ng-container matColumnDef="nbc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Nombre de cours
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.nbc }}
+          </td>
+        </ng-container>
+        <!-- nbh Column -->
+        <ng-container matColumnDef="nbh">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Volume horaire
+          </th>
+          <td mat-cell *matCellDef="let row">{{ row.nbh }}</td>
+        </ng-container>
+        <!-- somme Column -->
+        <ng-container matColumnDef="somme">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Montant(MRU)
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.somme }}
+          </td>
+        </ng-container>
+        <!-- action Column -->
+        <ng-container matColumnDef="action">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            class="border-l"
+          >
+            Action
+          </th>
+          <td mat-cell *matCellDef="let row" class="border-l">
+            <button mat-flat-button routerLink="./{{ row._id }}">
+              <mat-icon color="primary">more_horiz</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row border-y-2 rounded-md" *matNoDataRow>
+          <td
+            colspan="6"
+            class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center"
+          >
+            <span class="text-3xl text-gray-500"
+              ><mat-icon>info</mat-icon></span
+            >
+            <p>Aucune donnée ne correspond ...</p>
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Sélectionnez la page des utilisateurs"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

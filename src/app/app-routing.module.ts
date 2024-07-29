@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HommeComponent } from './homme/homme/homme.component';
 import { ProfilModule } from './profil/profil.module';
-import { AuthGuard } from './guard/auth.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -10,8 +9,9 @@ const routes: Routes = [
     loadChildren: () =>
       import('./profil/profil.module').then((module) => ProfilModule),
   },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '**', component: HommeComponent, canActivate: [AuthGuard] },
+  /*   { path: '', redirectTo: '/', pathMatch: 'full' }, */
+  //  { path: '**', component: HommeComponent /*  canActivate: [AuthGuard] */ },
+  { path: 'not-found', component: NotFoundComponent },
 ];
 
 @NgModule({

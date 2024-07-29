@@ -1,0 +1,134 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+  <div class="bg-white rounded-lg shadow p-6 flex items-center">
+    <div class="text-blue-500 bg-blue-100 p-3 rounded-full">
+      <i class="fas fa-dollar-sign"></i>
+    </div>
+    <div class="ml-4">
+      <p class="text-gray-600">Cours</p>
+      <p class="text-2xl font-semibold">{{ data?.cours_total }}</p>
+      <p class="text-gray-600">signeés</p>
+      <p class="text-2xl font-semibold">
+        {{ data?.cours_effectue }} ({{
+          data?.cours_total != 0
+            ? ((data?.cours_effectue * 100) / data?.cours_total).toFixed(0)
+            : 0
+        }}%)
+      </p>
+    </div>
+  </div>
+  <div
+    class="bg-white rounded-lg shadow p-6 flex items-center"
+    *ngIf="role != 'professeur'"
+  >
+    <div class="text-green-500 bg-green-100 p-3 rounded-full">
+      <i class="fas fa-users"></i>
+    </div>
+    <div class="ml-4">
+      <p class="text-gray-600">Utilisateurs</p>
+      <p class="text-2xl font-semibold">{{ data?.users }}</p>
+      <p class="text-gray-600">activés</p>
+      <p class="text-2xl font-semibold">
+        {{ data?.active_users }} ({{
+          data?.users != 0
+            ? ((data?.active_users * 100) / data?.users).toFixed(0)
+            : 0
+        }}%)
+      </p>
+    </div>
+  </div>
+  <div
+    class="bg-white rounded-lg shadow p-6 flex items-center"
+    *ngIf="role === 'professeur'"
+  >
+    <div class="text-green-500 bg-green-100 p-3 rounded-full">
+      <i class="fas fa-users"></i>
+    </div>
+    <div class="ml-4">
+      <p class="text-gray-600">Elements</p>
+      <p class="text-2xl font-semibold">{{ data?.prof_ALL }}</p>
+      <p class="text-gray-600">CM</p>
+      <p class="text-2xl font-semibold">
+        {{ data?.prof_CM }} ({{
+          data?.prof_ALL != 0
+            ? ((data?.prof_CM * 100) / data?.prof_ALL).toFixed(0)
+            : 0
+        }}%)
+      </p>
+    </div>
+  </div>
+  <div class="bg-white rounded-lg shadow p-6 flex items-center">
+    <div class="text-yellow-500 bg-yellow-100 p-3 rounded-full">
+      <i class="fas fa-user-check"></i>
+    </div>
+    <div class="ml-4">
+      <p class="text-gray-600">Paiyements</p>
+      <p class="text-2xl font-semibold">{{ data?.paiement_en_attente }}</p>
+      <p class="text-gray-600">validés</p>
+      <p class="text-2xl font-semibold">
+        {{ data?.paiement_effectue }} ({{
+          data?.paiement_en_attente != 0
+            ? (
+                (data?.paiement_effectue * 100) /
+                data?.paiement_en_attente
+              ).toFixed(0)
+            : 0
+        }}%)
+      </p>
+    </div>
+  </div>
+  <div
+    class="bg-white rounded-lg shadow p-6 flex items-center"
+    *ngIf="role != 'professeur'"
+  >
+    <div class="text-red-500 bg-red-100 p-3 rounded-full">
+      <i class="fas fa-chart-line"></i>
+    </div>
+    <div class="ml-4">
+      <p class="text-gray-600">Professeurs</p>
+      <p class="text-gray-600">{{ data.professeurs }}</p>
+
+      <p class="text-2xl font-semibold">
+        {{
+          data?.users != 0
+            ? ((data.professeurs * 100) / data.users).toFixed(0)
+            : 0
+        }}
+        %
+      </p>
+    </div>
+  </div>
+  <!--   <div
+    class="bg-white rounded-lg shadow p-6 flex items-center"
+    *ngIf="role === 'professeur'"
+  >
+    <div class="text-red-500 bg-red-100 p-3 rounded-full">
+      <i class="fas fa-chart-line"></i>
+    </div>
+    <div class="ml-4">
+      <p class="text-gray-600">Groupes</p>
+      <p class="text-gray-600">
+        {{
+          data?.groupes?.CM.groups.length +
+            data?.groupes?.TP.groups.length +
+            data.groupes.TD.groups.length
+        }}
+      </p>
+      <p class="text-gray-600">CM</p>
+      <p class="text-2xl font-semibold">
+        {{
+          data?.groupes.CM.groups &&
+          data?.groupes.TD.groups &&
+          data?.groupes.TP.groups != 0
+            ? (
+                (data.groupes.CM.groups.length * 100) /
+                (data.groupes.CM.groups.length +
+                  data.groupes.TP.groups.length +
+                  data.groupes.TD.groups.length)
+              ).toFixed(0)
+            : 0
+        }}
+        %
+      </p>
+    </div>
+  </div> -->
+</div>

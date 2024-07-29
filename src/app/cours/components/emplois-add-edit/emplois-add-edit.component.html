@@ -1,0 +1,99 @@
+<div
+  mat-dialog-title
+  class="border-1 flex justify-start align-items-center py-3"
+>
+  <h1>{{ data ? "Modifier la" : "Ajouter une" }} cour</h1>
+</div>
+<form [formGroup]="emploiForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row border-1 rounded-md py-2 px-6">
+      <div class="flex justify-between space-x-4">
+        <mat-form-field appearance="outline" class="fill">
+          <mat-label>filiere</mat-label>
+          <select matNativeControl name="filiere" formControlName="filiere">
+            <option selected value=""></option>
+            <option *ngFor="let filiere of filieres" value="{{ filiere._id }}">
+              {{ filiere.name }}
+            </option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="fill">
+          <mat-label>element</mat-label>
+          <select matNativeControl name="element" formControlName="element">
+            <option value=""></option>
+            <option *ngFor="let element of elements" value="{{ element._id }}">
+              S{{ element.semestre }} : {{ element.name }}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="flex justify-between space-x-4">
+        <mat-form-field appearance="outline" class="fill">
+          <mat-label>Type</mat-label>
+          <select name="type" formControlName="type" matNativeControl>
+            <option value=""></option>
+            <option *ngFor="let type of emploi_types" value="{{ type }}">
+              {{ type }}
+            </option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="fill">
+          <mat-label>Groupe</mat-label>
+          <select matNativeControl name="groupe" formControlName="groupe">
+            <option value=""></option>
+            <option *ngFor="let groupe of groupes" value="{{ groupe }}">
+              G {{ groupe.split("-")[2] }}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+
+      <div class="type space-x-2">
+        <mat-form-field appearance="outline" class="not-fill mr-4">
+          <mat-label>Jour</mat-label>
+          <select name="dayNumero" formControlName="dayNumero" matNativeControl>
+            <option
+              *ngFor="let jour of daysOfWeek"
+              [value]="daysOfWeek.indexOf(jour) + 1"
+            >
+              {{ jour }}
+            </option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="not-fill">
+          <mat-label>Début</mat-label>
+          <select matNativeControl name="startTime" formControlName="startTime">
+            <option *ngFor="let itm of debit_plan" [ngValue]="itm.value">
+              {{ itm.date }}
+            </option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="not-fill">
+          <mat-label>Nombre d'heures</mat-label>
+          <input
+            name="nbh"
+            type="number"
+            matInput
+            formControlName="nbh"
+            placeholder="CM nb d`heures"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button
+      mat-stroked-button
+      class="px-3"
+      type="button"
+      color="warn"
+      [mat-dialog-close]="false"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-stroked-button color="primary" class="px-3" type="submit">
+      {{ data ? "Modifier" : "Enregistrer" }}
+      <mat-icon>checked</mat-icon>
+    </button>
+  </div>
+</form>

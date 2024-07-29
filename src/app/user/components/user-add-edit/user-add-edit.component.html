@@ -1,1 +1,157 @@
-<p>user-add-edit works!</p>
+<div mat-dialog-title class="mb-2 drop-shadow-sm">
+  <h1 class="text-xl font-medium">
+    {{
+      data && data.role != "professeur"
+        ? "Modifier l'utilisateur"
+        : data && data.role === "professeur"
+        ? "Modifier l'enseignant(e)"
+        : "Ajouter un utilisateur"
+    }}
+  </h1>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div
+      class="row py-7 px-2 border border-gray-300 rounded-lg bg-white relative image-overlap"
+    >
+      <div>
+        <input
+          type="file"
+          style="display: none"
+          (change)="uploads($event)"
+          name="image"
+          id="image"
+        />
+        <label for="image" class="flex justify-center">
+          <div class="flex justify-between items-center rounded-full w-full">
+            <img
+              [src]="photo"
+              alt="user"
+              style="width: 90px; height: 90px"
+              class="object-cover w-24 h-24 md:w-48 md:h-auto rounded-full mx-auto border-2 border-gray-500"
+            />
+          </div>
+        </label>
+      </div>
+
+      <div class="fullname mt-5">
+        <mat-form-field appearance="outline" class="not-fill">
+          <mat-label>Nom</mat-label>
+          <input name="nom" type="text" matInput formControlName="nom" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="not-fill">
+          <mat-label>Prenom</mat-label>
+          <input name="prenom" type="text" matInput formControlName="prenom" />
+        </mat-form-field>
+      </div>
+      <div class="contact">
+        <mat-form-field appearance="outline" class="not-fill">
+          <mat-label>Téléphone</mat-label>
+          <input
+            name="mobile"
+            type="number"
+            matInput
+            formControlName="mobile"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="not-fill">
+          <mat-label>E-mail</mat-label>
+          <input name="nom" type="email" matInput formControlName="email" />
+        </mat-form-field>
+      </div>
+      <div class="password">
+        <mat-form-field appearance="outline" class="not-fill" *ngIf="!data">
+          <mat-label>Password</mat-label>
+          <input
+            name="password"
+            type="password"
+            matInput
+            formControlName="password"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="not-fill" *ngIf="!data">
+          <mat-label>passwordConfirm</mat-label>
+          <input
+            name="passwordConfirm"
+            type="password"
+            matInput
+            formControlName="passwordConfirm"
+          />
+        </mat-form-field>
+      </div>
+
+      <section class="example-section">
+        <label class="example-margin">Role:</label>
+        <mat-radio-group
+          matNativeControl
+          formControlName="role"
+          name="role"
+          [(ngModel)]="selectedRole"
+          (change)="role = selectedRole"
+        >
+          <mat-radio-button
+            class="example-margin"
+            value="professeur"
+            [disabled]="data && data.role != 'professeur'"
+            >Enseignant</mat-radio-button
+          >
+          <mat-radio-button
+            class="example-margin"
+            value="responsable"
+            [disabled]="data && data.role === 'professeur'"
+            >Responsable</mat-radio-button
+          >
+          <mat-radio-button
+            class="example-margin"
+            value="admin"
+            [disabled]="data && data.role === 'professeur'"
+            >admin</mat-radio-button
+          >
+        </mat-radio-group>
+      </section>
+
+      <div class="compte">
+        <mat-form-field
+          *ngIf="!data || data.role === 'professeur'"
+          appearance="outline"
+          class="not-fill"
+        >
+          <mat-label>Numero de compte</mat-label>
+          <input
+            name="accountNumero"
+            type="number"
+            matInput
+            formControlName="accountNumero"
+          />
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="!data || data.role === 'professeur'"
+          appearance="outline"
+          class="not-fill"
+        >
+          <mat-label>Nom de la banque</mat-label>
+          <mat-select formControlName="banque">
+            <mat-option *ngFor="let banque of banques" value="{{ banque }}">
+              {{ banque }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action py-2">
+    <button
+      mat-stroked-button
+      class="px-3"
+      type="button"
+      color="warn"
+      [mat-dialog-close]="false"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-stroked-button color="primary" class="px-3" type="submit">
+      {{ data ? "Modifier" : "Enregistrer" }}
+      <mat-icon>checked</mat-icon>
+    </button>
+  </div>
+</form>

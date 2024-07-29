@@ -8,8 +8,14 @@ import {
 import {
   faAngleDown,
   faAngleRight,
+  faBriefcase,
+  faChartBar,
+  faClock,
   faClose,
+  faCreditCard,
   faHome,
+  faList,
+  faPoll,
 } from '@fortawesome/free-solid-svg-icons';
 import { fadeInOut } from './helper/fade-in-out';
 import {
@@ -28,6 +34,8 @@ import {
   resizeScreenAction,
   toggleCollapseAction,
 } from './store/actions';
+import { AppState } from '../store/app.state';
+
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
@@ -57,17 +65,60 @@ export class SidenavComponent implements OnInit {
   collapsed!: boolean;
   screenWidth!: number;
   isNewInstence = false;
-  navbarData = navbarData;
+  navbarData: any;
   faClose = faClose;
   faAngleRight = faAngleRight;
   faAngleDown = faAngleDown;
   multiple: boolean = true;
-  constructor(
-    public router: Router,
-    private store: Store<{
-      sidenav: { collapsed: boolean; screenWidth: number };
-    }>
-  ) {}
+  role: any;
+  constructor(public router: Router, private store: Store<AppState>) {
+    this.role = localStorage.getItem('role');
+    if (this.role === 'professeur') {
+      this.navbarData = [
+        {
+          routerLink: '/professeur/homme',
+          icon: faHome,
+          label: 'Dashbord',
+        },
+        {
+          routerLink: `/professeur/professeurs/${localStorage.getItem(
+            'prof_id'
+          )}/emplois`,
+          icon: faClock,
+          label: 'Emplois',
+        },
+        {
+          routerLink: `/professeur/professeurs/${localStorage.getItem(
+            'prof_id'
+          )}/cours`,
+          icon: faList,
+          label: 'Cours',
+        },
+
+        {
+          routerLink: `/professeur/resultats/${localStorage.getItem(
+            'prof_id'
+          )}`,
+          icon: faPoll,
+          label: 'Resultats',
+        },
+        {
+          routerLink: '/professeur/paiements',
+          icon: faCreditCard,
+          label: 'Paiements',
+        },
+        {
+          routerLink: `/professeur/professeurs/${localStorage.getItem(
+            'prof_id'
+          )}`,
+          icon: faBriefcase,
+          label: 'Elements',
+        },
+      ];
+    } else {
+      this.navbarData = navbarData;
+    }
+  }
   ngOnInit(): void {
     this.store.select('sidenav').subscribe((data) => {
       this.collapsed = data.collapsed;
@@ -76,10 +127,7 @@ export class SidenavComponent implements OnInit {
     this.screenWidth = window.innerWidth;
     this.store.dispatch(
       resizeScreenAction({
-        sidenav: {
-          collapsed: this.collapsed,
-          screenWidth: this.screenWidth,
-        },
+        screenWidth: this.screenWidth,
       })
     );
   }
@@ -89,38 +137,22 @@ export class SidenavComponent implements OnInit {
     this.collapsed = this.screenWidth <= 768 ? false : true;
     this.store.dispatch(
       resizeScreenAction({
-        sidenav: {
-          collapsed: this.collapsed,
-          screenWidth: this.screenWidth,
-        },
+        screenWidth: this.screenWidth,
       })
     );
   }
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
-    /*    if (this.collapsed) {
-      this.isNewInstence = true;
-    } */
     this.store.dispatch(
       toggleCollapseAction({
-        sidenav: {
-          collapsed: this.collapsed,
-          screenWidth: this.screenWidth,
-        },
+        collapsed: this.collapsed,
       })
     );
   }
   claseSidenav(): void {
     this.collapsed = false;
-    this.store.dispatch(
-      closeSidenavAction({
-        sidenav: {
-          collapsed: this.collapsed,
-          screenWidth: this.screenWidth,
-        },
-      })
-    );
+    this.store.dispatch(closeSidenavAction());
   }
   handleClick(item: INavbarData): void {
     this.shrinkItems(item);

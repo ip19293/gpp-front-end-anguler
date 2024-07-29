@@ -1,12 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .sidenav {
-  background-color: #263238;
+  background-color: white;
   transition: all 0.5s ease;
   position: fixed;
   z-index: 2;
   top: 0;
   width: 5rem;
   height: 100vh;
-  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  /*  box-shadow: 0.063rem 0 1.25rem 0 #8690a3; */
+  box-shadow: 0.063rem 0 1.25rem 0 whitesmoke;
   .logo-container {
     display: flex;
     align-items: center;
@@ -29,7 +33,7 @@
       margin-left: 1.5rem;
       font-size: 24px;
       font-weight: 700;
-      color: #fff;
+      color: rgb(91, 88, 88);
     }
     .btn-close {
       margin-left: auto;
@@ -40,7 +44,8 @@
       background-color: transparent;
       border: none;
       .fa-close {
-        color: #fff;
+        /*     color: #fff; */
+        color: #464545;
         font-size: 24px;
       }
     }
@@ -67,7 +72,8 @@
       display: flex;
       align-items: center;
       height: 3rem;
-      color: #f3f3f3;
+      /* color: #f3f3f3; */
+      color: #464545;
       text-decoration: none;
       border-radius: 0.625rem;
       transition: all 0.3s ease;
@@ -84,6 +90,7 @@
     }
     .sidenav-nav-link :hover {
       background-color: #fff;
+      background-color: whitesmoke;
       color: #000;
 
       .menu-collapse-icon {
@@ -93,13 +100,17 @@
   }
   .sidenav-nav-item:hover {
     .sidenav-nav-link {
-      background-color: #fff;
+      /* background-color: #fff; */
+      /*  background-color: #f4f7f9; */
+      background-color: whitesmoke;
       color: #000;
     }
   }
 }
 .active {
-  background-color: #fff;
+  /*   background-color: #fff; */
+  /*  background-color: #f4f7f9; */
+  background-color: whitesmoke;
   .menu-collapse-icon,
   .sidenav-link-icon,
   .sadenav-link-text {
@@ -108,7 +119,8 @@
 }
 .active-sublevel {
   color: #f3f3f3 !important;
-  /*   opacity: 1 !important; */
+  color: black !important;
+  opacity: 1 !important;
 }
 .menu-collapse-icon {
   font-size: 25px;
@@ -117,6 +129,7 @@
   margin: auto 0.5rem auto auto;
   text-align: center;
   color: #f3f3f3;
+  color: #464545;
 }
 
 .sublevel-nav {
@@ -146,6 +159,7 @@
     }
     .sublevel-nav-link:hover {
       color: #fff;
+      color: #000;
     }
   }
 }

@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.timetable-container {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  padding-bottom: 10px;
+}
+
+.timetable-header {
+  display: flex;
+  align-items: center;
+}
+
+.timetable-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start; /* Align rows from the top */
+}
+
+.cell {
+  flex: 1;
+  padding: 3px;
+  text-align: center;
+  // border: 1px solid #ccc;
+}
+
+.empty-cell {
+  flex: 1;
+}
+
+.time-slot {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.day-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule {
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 600px) {
+  .cell,
+  .time-slot {
+    font-size: 14px;
+  }
+}
+.example-accordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+}
+.card-body {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+.example-accordion-item {
+  display: block;
+  border: solid 1px #ccc;
+}
+
+.example-accordion-item + .example-accordion-item {
+  border-top: none;
+}
+
+.example-accordion-item-header {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.example-accordion-item-description {
+  font-size: 0.85em;
+  color: #999;
+}
+
+.example-accordion-item-header,
+.example-accordion-item-body {
+  padding: 5px;
+}
+
+.example-accordion-item-header:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.example-accordion-item:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.example-accordion-item:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}

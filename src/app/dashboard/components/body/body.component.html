@@ -1,3 +1,21 @@
 <div class="body" [ngClass]="getBodyClass()">
+  <div
+    class="text-center sm:text-left md:text-center lg:text-right xl:text-center"
+  >
+    <!--     <h1
+      class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-blue-600 font-bold"
+    >
+      {{ element }}
+    </h1> -->
+    <p
+      style="font-family: 'Courier New', Courier, monospace; font-weight: 600"
+      class="text-lg my-2 text-gray-700 font-extrabold capitalize"
+    >
+      {{ element }}
+    </p>
+  </div>
+
+  <!--   <h1 class="text-lg text-blue-300 mb-2 uppercase">{{ element }}</h1> -->
+  <app-actionbar></app-actionbar>
   <router-outlet></router-outlet>
 </div>

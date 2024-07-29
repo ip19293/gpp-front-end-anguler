@@ -18,7 +18,16 @@ import {
   faMortarBoard,
   faUsersBetweenLines,
   faUsersRectangle,
+  faClock,
+  faGraduationCap,
+  faClipboardList,
   faCalendarCheck,
+  faList,
+  faBook,
+  faFileAlt,
+  faCreditCard,
+  faCog,
+  faBriefcase,
 } from '@fortawesome/free-solid-svg-icons';
 import { INavbarData } from '../types/side-nav-item-interface';
 
@@ -50,50 +59,27 @@ export const navbarData: INavbarData[] = [
     icon: faBookOpenReader,
     label: 'Filières',
   },
-  /*
   {
-    routerLink: 'emplois',
-    icon: faCalendarDays,
+    routerLink: '/admin/emplois',
+    icon: faClock,
     label: 'Emploi du temps',
-     items: [
-      { routerLink: 'emplois', label: 'Liste enregistré' },
-      { routerLink: 'emplois/add-edit', label: 'Ajouter un' },
+  },
+  { routerLink: '/admin/cours', icon: faCalendarCheck, label: 'Cours' },
+  {
+    routerLink: '/admin/paiements',
+    icon: faHandHoldingDollar,
+    label: 'Paiements',
+    items: [
       {
-        routerLink: 'cours',
-        label: 'Cours',
-        items: [
-          { routerLink: 'cours', label: 'Liste enregistré' },
-          { routerLink: 'cours/list-non-signe', label: 'Liste non signé' },
-          { routerLink: 'cours/list-non-signe', label: 'Nouvel cours' },
-        ],
+        routerLink: '/admin/resultats',
+        label: 'Résultats',
       },
+      { routerLink: '/admin/paiements', label: 'Liste de paiements' },
     ],
   },
-   */
-  { routerLink: '/admin/cours', icon: faCalendarCheck, label: 'Cours' },
   /*  {
-    routerLink: 'paiement',
-    icon: faHandHoldingDollar,
-    label: 'Paiement',
-    items: [
-      { routerLink: 'paiement', label: 'Les cotisations des enseignants' },
-      { routerLink: 'paiement/liste-cree', label: 'Paiements' },
-    ],
-  }, */
-  /*   {
-    routerLink: 'settings',
+    routerLink: '/admin/parametres',
     icon: faGear,
     label: 'Paramètres',
-    expanded: true,
-    items: [
-      {
-        routerLink: 'settings/profil',
-        label: 'Profil',
-      },
-      {
-        routerLink: 'settings/customize',
-        label: 'Personnaliser',
-      },
-    ],
   }, */
 ];

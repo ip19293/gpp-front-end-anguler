@@ -4,7 +4,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, catchError, map, mergeMap, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { UsersActionTypes } from './actions-type';
-import { GetAllUsersErrorAction, GetAllUsersSuccessAction } from './actions';
+import {
+  AddUserErrorAction,
+  AddUserSuccessAction,
+  GetAllUsersErrorAction,
+  GetAllUsersSuccessAction,
+} from './actions';
 
 @Injectable()
 export class UsersEffects {
@@ -16,6 +21,17 @@ export class UsersEffects {
         return this.servce.getAllUsers().pipe(
           map((users) => new GetAllUsersSuccessAction(users)),
           catchError((err) => of(new GetAllUsersErrorAction(err.message)))
+        );
+      })
+    )
+  );
+  AddUserEffect: Observable<Action> = createEffect(() =>
+    this.effectActions.pipe(
+      ofType(UsersActionTypes.ADD_USER),
+      mergeMap((action) => {
+        return this.servce.addUser(action).pipe(
+          map((message) => new AddUserSuccessAction(message)),
+          catchError((err) => of(new AddUserErrorAction(err.message)))
         );
       })
     )

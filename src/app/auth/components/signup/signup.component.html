@@ -1,0 +1,192 @@
+<!------------------------------------------  Main container ---------------------------- -->
+<div class="body">
+  <div
+    class="container d-flex justify-content-center align-items-center min-vh-100"
+  >
+    <!------------------------------------------  logo container ---------------------------- -->
+    <div class="row border rounder-5 p-3 bg-white shadow box-area">
+      <!------------------------------------------  left box ---------------------------- -->
+      <div
+        class="col-md-6 rounder-4 d-flex justify-content-center align-items-center flex-column left-box"
+        style="background-color: whitesmoke"
+      >
+        <div class="featured-image mb-3">
+          <img
+            src="assets/images/supnum.png"
+            alt=""
+            class="img-fluid"
+            style="width: 250px"
+          />
+          <p
+            class="text-black f-s-2"
+            style="
+              font-family: 'Courier New', Courier, monospace;
+              font-weight: 600;
+            "
+          >
+            Institut supérieur du numérique
+          </p>
+          <small
+            class="text-black text-wrap text-center"
+            style="width: 17rem; font-family: 'Courier New', Courier, monospace"
+            >Gestion de Paiement des Professeurs</small
+          >
+        </div>
+      </div>
+      <!------------------------------------------  right box ---------------------------- -->
+      <div class="col-md-6 right-box">
+        <div class="row items-center">
+          <div class="header-text mb-1">
+            <h1 class="text-xl font-bold mb-4 text-center">
+              Inscription à l'Application
+            </h1>
+          </div>
+          <!-- ------------------------------------------------------------------------------------------------------------------ -->
+          <mat-stepper
+            class="example-stepper row items-center"
+            [orientation]="(stepperOrientation | async)!"
+            linear
+            #stepper
+          >
+            <!-- -------------------------------------------------------------------------------------- Mot de passe Form -------------------->
+            <mat-step [stepControl]="motPasseForm" [editable]="isEditable">
+              <form [formGroup]="motPasseForm">
+                <mat-form-field appearance="outline" class="w-100">
+                  <input
+                    matInput
+                    placeholder="Adresse e-mail"
+                    type="email"
+                    formControlName="email"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input
+                    matInput
+                    placeholder="Mot de passe "
+                    type="password"
+                    formControlName="password"
+                    required
+                  />
+                </mat-form-field>
+
+                <div>
+                  <div class="input-group mb-4 gap-1">
+                    <!-- <button
+                      *ngIf="role === 'professeur'"
+                      mat-button
+                      matStepperNext
+                    >
+                      Suivant
+                    </button>
+                       <button
+                      *ngIf="role !== 'professeur'"
+                      mat-button
+                      color="primary"
+                      (click)="verification()"
+                      [disabled]="!motPasseForm.valid"
+                    >
+                      <mat-icon>key</mat-icon>
+                      S'inscrire
+                    </button> -->
+                    <button
+                      *ngIf="role === 'professeur'"
+                      mat-button
+                      matStepperNext
+                      class="flex hover:bg-gray-600 group items-center rounded-md bg-gray-700 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
+                    >
+                      Suivant
+                    </button>
+                    <a
+                      *ngIf="role !== 'professeur'"
+                      (click)="verification()"
+                      mat-button
+                      [disabled]="!motPasseForm.valid"
+                      type="submit"
+                      class="flex hover:bg-gray-600 group items-center rounded-md bg-gray-700 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
+                    >
+                      <mat-icon>key</mat-icon>
+                      S'inscrire
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+            <!-- ---------------------------------------------------------------------------banque et account numero----------- -->
+            <mat-step
+              [stepControl]="professeurForm"
+              [editable]="isEditable"
+              *ngIf="role === 'professeur'"
+            >
+              <form [formGroup]="professeurForm">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Numero de compte</mat-label>
+                  <input
+                    name="accountNumero"
+                    type="number"
+                    matInput
+                    formControlName="accountNumero"
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Nom de la banque</mat-label>
+                  <mat-select formControlName="banque">
+                    <mat-option
+                      *ngFor="let banque of banques"
+                      value="{{ banque }}"
+                    >
+                      {{ banque }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <div>
+                  <div class="input-group mb-4 gap-1">
+                    <!--  <button mat-button matStepperPrevious>Previous</button>
+                       <button
+                      mat-button
+                      color="primary"
+                      (click)="signup()"
+                      [disabled]="!professeurForm.valid"
+                    >
+                      <mat-icon>key</mat-icon>
+                      S'inscrire
+                    </button> -->
+                    <button
+                      mat-button
+                      matStepperPrevious
+                      class="flex hover:bg-gray-600 group items-center rounded-md bg-gray-700 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
+                    >
+                      Previous
+                    </button>
+
+                    <a
+                      mat-button
+                      (click)="signup()"
+                      [disabled]="!professeurForm.valid"
+                      type="submit"
+                      class="flex hover:bg-gray-600 group items-center rounded-md bg-gray-700 text-white text-sm font-medium pl-2 pr-3 py-2 shadow-sm"
+                    >
+                      <mat-icon>key</mat-icon>
+                      S'inscrire
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+            <!-- -------------------------------------------------------------------------------------------------- -->
+          </mat-stepper>
+          <div class="row justify-start">
+            <small
+              >Vous avez de compte déja?
+              <a class="text-blue-500" routerLink="../login"
+                >Connectez-vous</a
+              ></small
+            >
+          </div>
+          <!-- -------------------------------------------------------------------------------------------- -->
+        </div>
+      </div>
+      <!------------------------------------------  Main container ---------------------------- -->
+    </div>
+  </div>
+</div>

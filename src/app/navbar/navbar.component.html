@@ -1,20 +1,6 @@
 <div class="head" [ngClass]="getHeadClass()">
   <div class="head-content">
     <div class="head-content-left">
-      <!--   <div class="search-container">
-        <div *ngIf="!canShawSearchAsOverlay" class="normal-search">
-          <input type="search" class="search" placeholder="Recherche..." />
-          <mat-icon class="search-icon">search</mat-icon>
-        </div>
-        <div *ngIf="canShawSearchAsOverlay">
-          <button
-            [cdkMenuTriggerFor]="searchOverlay"
-            class="search-menu-btn ripple"
-          >
-            <mat-icon>search</mat-icon>
-          </button>
-        </div>
-      </div> -->
       <app-filter></app-filter>
     </div>
     <div class="head-content-right">
@@ -24,11 +10,7 @@
             <img src="assets/flag/mr.png" alt="flag" class="flag" />
           </button>
         </div>
-        <div class="head-menu-item">
-          <button class="head-menu-item-btn ripple">
-            <mat-icon>crop_free</mat-icon>
-          </button>
-        </div>
+
         <div class="head-menu-item">
           <button
             class="head-menu-item-btn ripple"
@@ -47,10 +29,10 @@
       <div class="head-user-avatar-container">
         <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
           <img
-            src="assets/flag/user.jpg"
+            [src]="jsonData.user.photo"
             alt="user"
             class="user-avatar"
-            style="width: 25px"
+            style="width: 25px; height: 25px; object-fit: cover"
           />
           <div class="circle-indicator pulse"></div>
         </div>
@@ -107,10 +89,16 @@
 <ng-template #userOverlay>
   <div class="overlay overlay-user overlay-fall" cdkMenu>
     <ul class="ul">
-      <li *ngFor="let item of userItems" class="li">
-        <a>
-          <mat-icon class="mat-icon">{{ item.icon }}</mat-icon>
-          <span>{{ item.label }}</span>
+      <li class="li">
+        <a class="flex items-center w-auto" (click)="profil()">
+          <mat-icon class="mat-icon">{{ userItems[0].icon }}</mat-icon>
+          <span>{{ userItems[0].label }}</span>
+        </a>
+      </li>
+      <li class="li">
+        <a class="flex items-center w-auto" (click)="logout()">
+          <mat-icon class="mat-icon">{{ userItems[1].icon }}</mat-icon>
+          <span>{{ userItems[1].label }}</span>
         </a>
       </li>
     </ul>

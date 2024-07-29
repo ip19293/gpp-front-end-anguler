@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from '../guard/auth.guard';
+import { HommeComponent } from '../homme/components/homme/homme.component';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'dashbord', pathMatch: 'full' },
-      { path: 'dashbord', component: DashboardComponent },
+      { path: '', redirectTo: 'homme', pathMatch: 'full' },
+
+      { path: 'homme', component: HommeComponent },
 
       {
         path: '',
@@ -30,6 +34,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('../cours/cours.module').then((m) => m.CoursModule),
       },
+      {
+        path: '',
+        loadChildren: () =>
+          import('../paiement/paiement.module').then((m) => m.PaiementModule),
+      },
+      { path: '**', redirectTo: 'homme', pathMatch: 'full' },
     ],
   },
 ];

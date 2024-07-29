@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.mat-green {
+  color: green;
+}
+.mat-red {
+  color: red;
+}
+.table {
+  width: 100%;
+
+  th {
+    @apply font-semibold bg-blend-lighten;
+  }
+}

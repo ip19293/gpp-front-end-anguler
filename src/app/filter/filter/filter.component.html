@@ -20,14 +20,15 @@
 <ng-template #searchOverlay>
   <div class="overlay overlay-search overlay-fall" cdkMenu>
     <input
+      (keyup)="applyFilter($event)"
       type="search"
       name=""
       id=""
       class="search"
       placeholder="Recherche..."
     />
-    <button class="search-btn">
+    <!--  <button class="search-btn">
       <mat-icon>search</mat-icon>
-    </button>
+    </button> -->
   </div>
 </ng-template>

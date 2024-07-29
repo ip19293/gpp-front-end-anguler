@@ -1,0 +1,89 @@
+<div class="card overflow-x-auto rounded-b-md">
+  <div class="card-body">
+    <mat-card class="">
+      <mat-card-header
+        class="flex flex-col w-full"
+        [ngClass]="dataSource.data.length === 1 ? 'hidden' : ''"
+      >
+        <mat-card-title
+          class="lg:text-2xl font-extrabold font-mono md:text-sm text-transform: capitalize"
+          >du
+          {{ fromDate | date : "MM/dd/yy" }}
+
+          au
+          {{ toDate | date : "MM/dd/yy" }}
+        </mat-card-title>
+      </mat-card-header>
+      <!-- ------------------------------------------------------------------------------------- -->
+      <div
+        [ngClass]="dataSource.data.length === 1 ? ' ' : 'hidden'"
+        class="bg-white border border-gray-200 p-4 rounded-md text-center"
+      >
+        <span class="text-3xl text-gray-500"><mat-icon>info</mat-icon></span>
+        <p class="text-lg">Aucune donnée disponible.</p>
+      </div>
+      <!-- ---------------------------------------------------------------------------------------- -->
+      <div
+        class="table border-x border-gray-200 rounded-md"
+        [ngClass]="dataSource.data.length > 1 ? ' ' : 'hidden'"
+      >
+        <table mat-table [dataSource]="dataSource" matSort class="table">
+          <!--  nbc Column -->
+          <ng-container matColumnDef="nbc" class="truncate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Nombre de cours
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.nbc }}
+            </td>
+          </ng-container>
+          <!--     Montant(MRU) -->
+          <ng-container matColumnDef="montant" class="truncate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Montant(UM)
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.somme }}
+            </td>
+          </ng-container>
+          <!--     prix(MRU) -->
+          <ng-container matColumnDef="prix" class="truncate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Prix(UM/H)
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.prix }}
+            </td>
+          </ng-container>
+          <!--     nbh -->
+          <ng-container matColumnDef="nbh" class="truncate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Heures de travail
+            </th>
+            <td mat-cell *matCellDef="let row">{{ row.th }} / {{ row.nbh }}</td>
+          </ng-container>
+
+          <!--     matiere -->
+          <ng-container matColumnDef="matiere" class="truncate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Element</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.name }}
+            </td>
+          </ng-container>
+
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedClms"
+            class="truncate"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedClms"
+            class="truncate"
+          ></tr>
+        </table>
+      </div>
+      <mat-card-actions align="end"> </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

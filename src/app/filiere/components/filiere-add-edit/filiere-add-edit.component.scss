@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content {
+  padding-top: 20px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+
+  .fill {
+    width: 45%;
+  }
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.action {
+  padding: 0px 25px 20px;
+}

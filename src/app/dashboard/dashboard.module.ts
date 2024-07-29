@@ -8,7 +8,8 @@ import { SidenavModule } from '../sidenav/sidenav.module';
 import { HommeModule } from '../homme/homme.module';
 import { UserModule } from '../user/user.module';
 import { CoursModule } from '../cours/cours.module';
-import { FiliereModule } from '../filiere/filiere.module';
+import { ActionbarModule } from '../actionbar/actionbar.module';
+import { PaiementModule } from '../paiement/paiement.module';
 
 @NgModule({
   declarations: [DashboardComponent, BodyComponent],
@@ -16,11 +17,12 @@ import { FiliereModule } from '../filiere/filiere.module';
     SharedModule,
     HommeModule,
     UserModule,
+    PaiementModule,
     CoursModule,
-    FiliereModule,
     DashboardRoutingModule,
     NavbarModule,
     SidenavModule,
+    ActionbarModule,
   ],
 })
 export class DashboardModule {}

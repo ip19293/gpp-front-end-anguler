@@ -1,7 +1,20 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">S</button>
-    <div class="logo-text" @fadeInOut *ngIf="collapsed">SupNum</div>
+    <button class="logo" (click)="toggleCollapse()">
+      <img
+        src="assets/images/supnum.png"
+        alt="Institut supérieur du numérique"
+        class="logo-img border-1 rounded-lg p-1"
+      />
+    </button>
+    <div
+      style="font-family: 'Courier New', Courier, monospace; font-weight: 600"
+      class="logo-text ml-4"
+      @fadeInOut
+      *ngIf="collapsed"
+    >
+      SupNum
+    </div>
     <button
       class="btn-close"
       @rotate

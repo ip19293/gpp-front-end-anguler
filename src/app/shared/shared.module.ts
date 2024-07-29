@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgSwitch, NgSwitchCase } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -17,11 +17,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { LayoutModule } from '@angular/cdk/layout';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
-  //declarations: [ExtractArrayValue],
+  declarations: [ConfirmComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -43,12 +51,21 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     MatPaginatorModule,
     MatSortModule,
     FontAwesomeModule,
+    MatDatepickerModule,
     OverlayModule,
     CdkMenuModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    LayoutModule,
+    NgSwitch,
+    CdkAccordionModule,
+    NgSwitchCase,
+    NgChartsModule,
   ],
   exports: [
     CommonModule,
     RouterModule,
+    MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -67,8 +84,16 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     MatPaginatorModule,
     MatSortModule,
     FontAwesomeModule,
+    MatDatepickerModule,
     OverlayModule,
     CdkMenuModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    LayoutModule,
+    NgSwitch,
+    CdkAccordionModule,
+    NgSwitchCase,
+    NgChartsModule,
   ],
 })
 export class SharedModule {}

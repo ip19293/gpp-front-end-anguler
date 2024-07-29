@@ -1,0 +1,187 @@
+<div mat-dialog-title class="mb-2 drop-shadow-sm">
+  <h1 class="text-xl font-medium">
+    Affectation de groupe du module {{ data.name }}
+  </h1>
+</div>
+
+<!-- ================================================================================================================================================== -->
+<form [formGroup]="elementForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row rounded-md py-2 px-6 content-body">
+      <div formArrayName="CM" class="flex flex-col">
+        <h2 class="text-xl font-bold my-2">CM</h2>
+        <div class="flex justify-between space-x-2">
+          <div
+            *ngFor="let cmGroup of CM.controls; let i = index"
+            [formGroupName]="i"
+            class="flex flex-col px-3 py-2 border border-gray-300 rounded"
+          >
+            <div class="mb-2" *ngFor="let prof of data.professeurCM">
+              <label
+                *ngIf="prof._id === elementForm.value.CM[i].professeur"
+                class="block text-lg font-medium text-gray-700"
+                >{{ prof.user.nom | uppercase }}
+                {{ prof.user.prenom | uppercase }}
+              </label>
+            </div>
+            <div formArrayName="groupe" class="mb-2">
+              <div
+                *ngFor="
+                  let groupControl of getGroupeControls(cmGroup)?.controls;
+                  let j = index
+                "
+                class="flex px-2"
+              >
+                <div class="space-x-1">
+                  <mat-form-field appearance="outline" class="input">
+                    <mat-label>Groupe</mat-label>
+                    <input type="number" matInput [formControlName]="j" />
+                  </mat-form-field>
+
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="removeGroupe(i, j, 'CM')"
+                  >
+                    <mat-icon color="warn">close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="addGroupe(i, 'CM')"
+                >
+                  <mat-icon color="primary">add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div formArrayName="TP" class="flex flex-col">
+        <h2 class="text-xl font-bold my-2">TP</h2>
+        <div class="flex justify-between space-x-2">
+          <div
+            *ngFor="let tpGroup of TP.controls; let i = index"
+            [formGroupName]="i"
+            class="flex flex-col px-3 py-2 border border-gray-300 rounded"
+          >
+            <div class="mb-2" *ngFor="let prof of data.professeurTP">
+              <label
+                *ngIf="prof._id === elementForm.value.TP[i].professeur"
+                class="block text-lg font-medium text-gray-700"
+                >{{ prof.user.nom | uppercase }}
+                {{ prof.user.prenom | uppercase }}
+              </label>
+            </div>
+            <div formArrayName="groupe" class="mb-2">
+              <div
+                *ngFor="
+                  let groupControl of getGroupeControls(tpGroup)?.controls;
+                  let j = index
+                "
+                class="flex px-2"
+              >
+                <div class="space-x-1">
+                  <mat-form-field appearance="outline" class="input">
+                    <mat-label>Groupe</mat-label>
+                    <input type="number" matInput [formControlName]="j" />
+                  </mat-form-field>
+
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="removeGroupe(i, j, 'TP')"
+                  >
+                    <mat-icon color="warn">close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="addGroupe(i, 'TP')"
+                >
+                  <mat-icon color="primary">add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div formArrayName="TD" class="flex flex-col">
+        <h2 class="text-xl font-bold my-2 flex">TD</h2>
+        <div class="flex justify-between space-x-2">
+          <div
+            *ngFor="let tdGroup of TD.controls; let i = index"
+            [formGroupName]="i"
+            class="flex flex-col px-3 py-2 border border-gray-300 rounded"
+          >
+            <div class="mb-2" *ngFor="let prof of data.professeurTD">
+              <label
+                *ngIf="prof._id === elementForm.value.TD[i].professeur"
+                class="block text-lg font-medium text-gray-700"
+                >{{ prof.user.nom | uppercase }}
+                {{ prof.user.prenom | uppercase }}
+              </label>
+            </div>
+            <div formArrayName="groupe" class="mb-2">
+              <div
+                *ngFor="
+                  let groupControl of getGroupeControls(tdGroup)?.controls;
+                  let j = index
+                "
+                class="flex px-2"
+              >
+                <div class="space-x-1">
+                  <mat-form-field appearance="outline" class="input">
+                    <mat-label>Groupe</mat-label>
+                    <input type="number" matInput [formControlName]="j" />
+                  </mat-form-field>
+
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="removeGroupe(i, j, 'TD')"
+                  >
+                    <mat-icon color="warn">close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="addGroupe(i, 'TD')"
+                >
+                  <mat-icon color="primary">add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions class="action space-x-3">
+      <button
+        mat-stroked-button
+        class="px-3"
+        type="button"
+        color="warn"
+        [mat-dialog-close]="false"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <button class="px-3" mat-stroked-button color="primary" type="submit">
+        {{ data ? "Modifier" : "Enregistrer" }}
+        <mat-icon>checked</mat-icon>
+      </button>
+    </div>
+  </div>
+</form>

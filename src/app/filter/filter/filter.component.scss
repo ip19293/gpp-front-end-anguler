@@ -7,7 +7,8 @@
       height: 2.375rem;
       padding-left: 2.5rem;
       padding-right: 1.25rem;
-      background-color: #f3f3f9;
+      /*     background-color: #f3f3f9; */
+      background-color: whitesmoke;
       box-shadow: none;
       border-radius: 1.875rem;
       outline: 0;
@@ -33,6 +34,31 @@
   .search-menu-btn:hover,
   .search-menu-btn:focus {
     color: #699dfa;
+  }
+}
+
+.head-trimmed {
+  width: calc(100% - 17.5625rem);
+  margin-left: 17.5625rem;
+}
+.head-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 104, 206, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 13px rgba(17, 64, 126, 0);
+  }
+}
+@keyframes fall {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
   }
 }
 .overlay {
@@ -69,4 +95,96 @@
     padding: 0.47rem 0.75rem;
     border-radius: 0.25rem;
   }
+}
+.overlay-notification {
+  .ul {
+    list-style: none;
+    width: 300px;
+    padding: 0px;
+    .li-head {
+      padding: 1rem;
+      &.notification-head-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .notification-head {
+          font-size: 15px;
+          color: #495057;
+        }
+        .view-all-link {
+          font-size: 80%;
+          color: #699dfa;
+          cursor: pointer;
+        }
+      }
+    }
+    .li {
+      padding: 1rem;
+
+      &.notification-message-container {
+        cursor: pointer;
+        display: flex;
+
+        .notification-icon {
+          margin-right: 15px;
+          font-size: 20px;
+          color: #699dfa;
+          width: 25px;
+          text-align: center;
+        }
+        .notification-subject {
+          margin-bottom: 0.25rem;
+          font-size: 15px;
+          color: #495057;
+        }
+        .notification-desc {
+          font-size: 12px;
+          color: #74788d;
+        }
+      }
+      &:hover {
+        background: #eff2f3;
+      }
+    }
+  }
+}
+
+.overlay-user {
+  .ul {
+    padding: 0.5rem 0;
+    list-style: none;
+    width: 10rem;
+
+    .li {
+      padding: 0.35rem 1.5rem;
+      width: 480px;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      color: #495057;
+
+      .mat-icon {
+        margin-right: 0.6rem;
+      }
+    }
+    .li:hover {
+      background: #eff2f3;
+    }
+  }
+}
+
+.ripple {
+  background-color: #fff;
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover,
+.ripple:focus {
+  background: #eff2f3 radial-gradient(circle, transparent 1%, #eff2f3 1%)
+    center/15000%;
+}
+.ripple:active {
+  background-color: #bec2c4;
+  background-size: 100%;
+  transition: background 0s;
 }

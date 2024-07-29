@@ -1,7 +1,7 @@
 import { SideNavInterface } from 'src/app/sidenav/types/side-nav.interface';
 
-export const SidenavIniState: SideNavInterface = {
+export const SidenavInitState: SideNavInterface = {
   collapsed: false,
   screenWidth: 0,
-  isNewInstanse: false,
+  canShawSearchAsOverlay: false,
 };

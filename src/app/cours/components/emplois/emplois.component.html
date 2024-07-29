@@ -1,0 +1,161 @@
+<div class="card overflow-x-auto rounded-b-md px-2 pb-4">
+  <div class="card-body">
+    <div class="timetable-container">
+      <div class="timetable-header">
+        <div class="cell border-0"></div>
+        <!-- Empty cell for alignment -->
+        <!--  <div class="cell" *ngFor="let day of daysOfWeek">{{ day }}</div> -->
+        <!-- Days of the week -->
+      </div>
+      <div class="timetable-body" *ngFor="let filiere of filieres">
+        <div class="row border-1 rounded-md px-2 mb-3 pb-5 pt-1">
+          <div class="text-xl font-serif font-thin flex justify-center p-2">
+            {{ filiere.description | uppercase }} - S{{
+              filiere.isPaireSemestre
+                ? filiere.semestres.split(",")[1]
+                : filiere.semestres.split(",")[0]
+            }}
+          </div>
+          <!-- Filiere name -->
+          <div class="cell" *ngFor="let day of daysOfWeek">
+            <!-- ------------------------------------------------------------------------------------------------------ -->
+
+            <cdk-accordion
+              class="example-accordion border-1 rounded-lg bg-white p-3 shadow-md"
+              *ngIf="
+                getFiliereEmploisByDay(
+                  filiere._id,
+                  daysOfWeek.indexOf(day),
+                  filiere.semestre
+                )?.length > 0
+              "
+            >
+              <div class="flex justify-between w-full">
+                <h2 class="text-xl font-serif font-extrabold py-1">
+                  {{ day }}
+                </h2>
+
+                <span
+                  class="relative flex h-3 w-3"
+                  *ngIf="daysOfWeek.indexOf(day) == today"
+                >
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-3 w-3 bg-green-500"
+                  ></span>
+                </span>
+              </div>
+              <cdk-accordion-item
+                *ngFor="
+                  let emploi of getFiliereEmploisByDay(
+                    filiere._id,
+                    daysOfWeek.indexOf(day),
+                    filiere.semestre
+                  );
+                  let index = index
+                "
+                #accordionItem="cdkAccordionItem"
+                class="example-accordion-item"
+                role="button"
+                tabindex="0"
+                [attr.id]="'accordion-header-' + index"
+                [attr.aria-expanded]="accordionItem.expanded"
+                [attr.aria-controls]="'accordion-body-' + index"
+              >
+                <div class="example-accordion-item-header">
+                  <span class="text-lg font-medium">
+                    <span class="capitalize">
+                      {{ emploi.startTime }} - {{ emploi.finishTime }}
+                    </span>
+
+                    <span class="flex justify-between items-center">
+                      <button mat-button (click)="accordionItem.toggle()">
+                        <mat-icon>{{
+                          accordionItem.expanded
+                            ? "keyboard_arrow_up"
+                            : "keyboard_arrow_down "
+                        }}</mat-icon>
+                      </button>
+                      <button
+                        mat-button
+                        (click)="deleteEmploi($event, emploi._id)"
+                      >
+                        <mat-icon color="warn">delete</mat-icon>
+                      </button>
+                    </span>
+                  </span>
+
+                  <div class="action">
+                    <span> </span>
+                  </div>
+                </div>
+                <div
+                  class="example-accordion-item-body text-lg font-normal"
+                  role="region"
+                  [style.display]="accordionItem.expanded ? '' : 'none'"
+                  [attr.id]="'accordion-body-' + index"
+                  [attr.aria-labelledby]="'accordion-header-' + index"
+                >
+                  <p>
+                    <span class="capitalize ordinal font-medium text-md"
+                      >{{ emploi.matiere }}
+                    </span>
+                  </p>
+                  <p class="ordinal">
+                    G{{ emploi.groupe.split("-")[2] }}({{ emploi.type }})
+                  </p>
+                  <p class="ordinal">{{ emploi.code.split("-")[1] }}</p>
+                  <p class="ordinal">{{ emploi.nom }} {{ emploi.prenom }}</p>
+                  <!--  <p class="ordinal">{{ emploi.type }}</p> -->
+                  <p class="flex justify-center items-center">
+                    <button mat-button (click)="openEditEmploiComp(emploi)">
+                      <mat-icon color="primary">update</mat-icon>
+                    </button>
+                  </p>
+                </div>
+              </cdk-accordion-item>
+            </cdk-accordion>
+          </div>
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------------------------------------------------------ -->
+<!--     <div
+              class="schedule"
+              *ngFor="
+                let schedule of getFiliereEmploisByDay(
+                  filiere._id,
+                  daysOfWeek.indexOf(day),
+                  semestre
+                )
+              "
+            >
+              <p>{{ schedule.startTime }} - {{ schedule.finishTime }}</p>
+              <p>{{ schedule.code.split("-")[1] }} - {{ schedule.type }}</p>
+              <p>{{ schedule.name }}</p>
+              <p>{{ schedule.prenom }}</p>
+              <p>
+                <span class="space-x-1">
+                  <button
+                    mat-icon-button
+                    (click)="deleteEmploi($event, schedule._id)"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    (click)="openEditEmploiComp(schedule)"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </span>
+              </p>
+
+
+            </div> -->

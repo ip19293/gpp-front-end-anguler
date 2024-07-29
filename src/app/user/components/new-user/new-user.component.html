@@ -1,0 +1,200 @@
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+  <div class="content bg-white">
+    <!-- ---------------------------------------------------------------------------------- -->
+    <mat-stepper
+      class="example-stepper row items-center"
+      [orientation]="(stepperOrientation | async)!"
+      linear
+      #stepper
+    >
+      <mat-step [stepControl]="userForm" [editable]="isEditable" state="phone">
+        <form [formGroup]="userForm">
+          <div class="col-span-full">
+            <label
+              for="cover-photo"
+              class="block text-sm font-medium leading-6 text-gray-900"
+              >Cover photo</label
+            >
+            <div
+              class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10"
+            >
+              <div class="text-center">
+                <svg
+                  class="mx-auto h-12 w-12 text-gray-300"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                  <label
+                    for="file-upload"
+                    class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                  >
+                    <span>Upload a file</span>
+                    <input
+                      id="file-upload"
+                      name="file-upload"
+                      type="file"
+                      class="sr-only"
+                    />
+                  </label>
+                  <p class="pl-1">or drag and drop</p>
+                </div>
+                <p class="text-xs leading-5 text-gray-600">
+                  PNG, JPG, GIF up to 10MB
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              matInput
+              placeholder="Nom"
+              type="text"
+              formControlName="nom"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              matInput
+              placeholder="Prénom"
+              type="text"
+              formControlName="prenom"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              matInput
+              placeholder="Adresse e-mail"
+              type="email"
+              formControlName="email"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              matInput
+              placeholder="Numéro de téléphone"
+              type="number"
+              formControlName="mobile"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Suivant</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- -------------------------------------------------------------------------------------- Mot de passe Form -------------------->
+      <mat-step [stepControl]="motPasseForm" [editable]="isEditable">
+        <form [formGroup]="motPasseForm">
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              matInput
+              placeholder="Mot de passe"
+              type="password"
+              formControlName="password"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <input
+              matInput
+              placeholder="Mot de passe confirme"
+              type="password"
+              formControlName="passwordConfirm"
+              required
+            />
+          </mat-form-field>
+
+          <section class="example-section">
+            <label class="example-margin">Role:</label>
+            <mat-radio-group
+              matNativeControl
+              formControlName="role"
+              name="role"
+              [(ngModel)]="selectedRole"
+              (change)="role = selectedRole"
+            >
+              <mat-radio-button class="example-margin" value="professeur"
+                >Enseignant</mat-radio-button
+              >
+              <mat-radio-button class="example-margin" value="responsable"
+                >Responsable</mat-radio-button
+              >
+            </mat-radio-group>
+          </section>
+          <div>
+            <div>
+              <button mat-button matStepperPrevious>Previous</button>
+              <button *ngIf="role === 'professeur'" mat-button matStepperNext>
+                Suivant
+              </button>
+              <button
+                *ngIf="role !== 'professeur'"
+                mat-button
+                color="primary"
+                (click)="onFormSubmit()"
+                [disabled]="!motPasseForm.valid"
+              >
+                <mat-icon>key</mat-icon>
+                S'inscrire
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <!-- ---------------------------------------------------------------------------banque et account numero----------- -->
+      <mat-step
+        [stepControl]="professeurForm"
+        [editable]="isEditable"
+        *ngIf="role === 'professeur'"
+      >
+        <form [formGroup]="professeurForm">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Numero de compte</mat-label>
+            <input
+              name="accountNumero"
+              type="number"
+              matInput
+              formControlName="accountNumero"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nom de la banque</mat-label>
+            <mat-select formControlName="banque">
+              <mat-option *ngFor="let banque of banques" value="{{ banque }}">
+                {{ banque }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <div>
+              <button mat-button matStepperPrevious>Previous</button>
+              <button
+                mat-button
+                color="primary"
+                (click)="onFormSubmit()"
+                [disabled]="!professeurForm.valid"
+              >
+                <mat-icon>key</mat-icon>
+                S'inscrire
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <!-- -------------------------------------------------------------------------------------------------- -->
+    </mat-stepper>
+    <!-- ---------------------------------------------------------------------------------- -->
+  </div>
+</form>

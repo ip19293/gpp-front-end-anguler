@@ -1,0 +1,9 @@
+<div class="body" [ngClass]="getBodyClass()">
+  <div
+    class="text-center sm:text-left md:text-center lg:text-right xl:text-center"
+  >
+    <p class="text-lg my-2 text-gray-700 font-bold capitalize">{{ element }}</p>
+  </div>
+  <app-actionbar></app-actionbar>
+  <router-outlet></router-outlet>
+</div>

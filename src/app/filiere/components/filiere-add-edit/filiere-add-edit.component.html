@@ -1,1 +1,52 @@
-<p>filiere-add-edit works!</p>
+<div mat-dialog-title class="border-b">
+  <h1>{{ data ? "Modifier la " : "Ajouter une " }}filière</h1>
+</div>
+<form [formGroup]="filliereForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row border-1 rounded-md py-2 px-6">
+      <mat-form-field appearance="outline" class="mt-4">
+        <mat-label>Nom</mat-label>
+        <input name="name" type="text" matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Semestres</mat-label>
+        <mat-select formControlName="semestres">
+          <mat-option *ngFor="let s of ['1,2', '3,4', '5,6']" [value]="s">
+            {{ s }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Niveau</mat-label>
+        <mat-select formControlName="niveau">
+          <mat-option value="licence"> Licence</mat-option>
+          <mat-option value="master"> Master</mat-option>
+          <mat-option value="doctorat"> Doctorat</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Semestre paire</mat-label>
+        <mat-select formControlName="isPaireSemestre">
+          <mat-option [value]="true"> Oui</mat-option>
+          <mat-option [value]="false"> No</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button
+      mat-stroked-button
+      class="px-3"
+      type="button"
+      color="warn"
+      [mat-dialog-close]="false"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-stroked-button color="primary" class="px-3" type="submit">
+      {{ data ? "Modifier" : "Enregistrer" }}
+      <mat-icon>checked</mat-icon>
+    </button>
+  </div>
+</form>
